@@ -1,0 +1,35 @@
+machine:
+  node: # add node dependency
+    version:
+      7.4
+
+environment:
+  RAILS_ENV: test # Add this so rails app knows which environment to use for all tasks
+
+dependencies:
+  cache_directories:
+    - /home/ubuntu/.cypress/Cypress
+    - /home/ubuntu/.cache/yarn
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - yarn global add gulp cypress-cli
+  post:
+    - cypress install
+
+database:
+  override:
+    - bundle exec rake db:create db:schema:load db:seed # This is normal task you are doing (just add db:seed)
+    - bundle exec rails s > $CIRCLE_ARTIFACTS/server.log 2>&1: # This task will start rails application in background
+        background: true
+
+test:
+  override:
+    - bundle exec rspec # run normal rspec command
+    - cypress run --config videoRecording=false,screenshotOnHeadlessFailure=false || cypress run --config videoRecording=true,screenshotOnHeadlessFailure=true
+
+general:
+  artifacts: # store cypress artifacts
+    - cypress/screenshots
+    - cypress/videos
+
+
