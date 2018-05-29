@@ -7,15 +7,17 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
-      
+      - image: cypress/base:6
+      environment:
+        ## this enables colors in the output
+        TERM: xterm
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
     working_directory: ~/cypress-example-todomvc
-
+    parallelism: 1
     steps:
       - checkout
 
@@ -35,5 +37,10 @@ jobs:
         
       # run tests!
       - run: yarn test
+      
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
 
 
