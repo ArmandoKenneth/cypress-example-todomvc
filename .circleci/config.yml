@@ -26,7 +26,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       # run tests!
-      - run: yarn test:ci:record
+      - run: yarn test:ci
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
