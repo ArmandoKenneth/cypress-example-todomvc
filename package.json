@@ -16,7 +16,7 @@
     "test:ci:chrome": "run-p --race start:ci cypress:run:chrome",
     "test:ci:headed": "run-p --race start:ci cypress:run:headed",
     "lint": "eslint --fix cypress/*/*.js",
-    "testando": "node scripts/integration-test.js run --config videoRecording=true,screenshotOnHeadlessFailure=true"
+    "testando": "node scripts/integration-test.js run --config videoRecording=false,screenshotOnHeadlessFailure=false"
   },
   "dependencies": {
     "director": "^1.2.0",
