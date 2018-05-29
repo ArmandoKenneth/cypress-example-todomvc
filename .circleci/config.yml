@@ -26,7 +26,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       # run tests!
-      - run: cypress run --config videoRecording=false,screenshotOnHeadlessFailure=false
+      - run: yarn testando
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
