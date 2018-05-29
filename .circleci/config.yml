@@ -31,5 +31,8 @@ jobs:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
+  test:
+    override:
+      - cypress run --config videoRecording=false,screenshotOnHeadlessFailure=false
 
 
